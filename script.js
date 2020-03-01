@@ -6,6 +6,10 @@ const div = document.getElementsByTagName('div');
 const grid = [];
 const gridNum = new Array(50).fill(new Array(50).fill(null));
 
+function empty() {}
+
+function zero() {}
+
 for (let y = 0; y < 50; y++) {
   const arr = [];
   grid.push(arr);
@@ -23,51 +27,50 @@ for (let y = 0; y < 50; y++) {
 }
 
 const click = () => {
-  const clickArr = [];
+  let numArr = [];
+  let booleanArr = [];
+  let booleanIndex = [];
   for (let i = 0; i < 2500; i++) {
     const num = +div[i].innerText;
-    clickArr.push(num);
+    numArr.push(num);
   }
+  console.log('%cValue array:', 'color: yellow', numArr);
 
   for (let i = 0; i < 2500; i++) {
-    const check = clickArr[i + 2] - clickArr[i + 1] === clickArr[i] && clickArr[i] !== 0;
-    // while (check === true) {
-    //   console.log('true');
-    //   break;
-    // }
+    const boolean = numArr[i + 2] - numArr[i + 1] === numArr[i] && numArr[i] !== 0;
+    booleanArr.push(boolean);
   }
+  console.log('%cBoolean array:', 'color: green', booleanArr);
 
-  // const check = clickArr.forEach(el => {
-  //   (clickArr[i + 2] - clickArr[i + 1] === clickArr[i]) === 0 ? true : false;
-  // });
-  // console.log(check);
+  booleanArr.forEach((el, index) => (el === true ? booleanIndex.push(index + 1) : null));
+  console.log('%cBoolean index:', 'color: skyblue', booleanIndex);
 
-  // const clickBoolean = [];
-  // for (let i = 2; i < 2500; i++) {
-  //   const boolean = clickArr[i + 2] - clickArr[i + 1] === clickArr[i];
-  //   clickBoolean.push(boolean);
-  // }
-  // console.log(clickBoolean);
-
-  // let result = [];
-  // clickBoolean.forEach((el, index) => (el === true ? result.push(index) : null));
-  // console.log(result);
+  for (let i = 0; i < booleanIndex.length; i++) {
+    if (booleanIndex[i + 1] - booleanIndex[i] === 1) {
+      const element = booleanIndex[i];
+      const zero = document.getElementById(element);
+      const one = document.getElementById(element + 1);
+      const two = document.getElementById(element + 2);
+      const three = document.getElementById(element + 3);
+      zero.style.backgroundColor = 'blue';
+      one.style.backgroundColor = 'blue';
+      two.style.backgroundColor = 'blue';
+      three.style.backgroundColor = 'blue';
+      zero.innerText = null;
+      one.innerText = null;
+      two.innerText = null;
+      three.innerText = null;
+      setTimeout(() => {
+        zero.style.backgroundColor = '';
+        one.style.backgroundColor = '';
+        two.style.backgroundColor = '';
+        three.style.backgroundColor = '';
+      }, 250);
+    } else {
+      continue;
+    }
+  }
 };
-
-// const click = () => {
-//   const clickArr = [];
-//   for (let i = 0; i < 50; i++) {
-//     const num = +div[i].innerText;
-//     clickArr.push(num);
-//   }
-//   for (let i = 0; i < 5; i++) {
-//     const test = clickArr[i + 2] - clickArr[i + 1] === clickArr[i];
-//     if (test) {
-//       div[i].innerText = 0;
-//     }
-//   }
-//   console.log(clickArr);
-// };
 
 container.addEventListener('click', event => {
   const elem = event.target;
@@ -94,95 +97,5 @@ container.addEventListener('click', event => {
     }, 250);
   }
 
-  // const gridRow = [];
-
-  // for (let i = 0; i < 50; i++) {
-  //   const rowElement = +grid[y][i].innerText;
-  //   gridRow.push(rowElement);
-  //   gridNum[y] = gridRow;
-  // }
-
-  // for (let i = 0; i < 50; i++) {
-  //   let columnElement = +grid[i][x].innerText;
-  //   gridNum[i][x] = columnElement;
-  // }
-  // console.log(gridRow);
-  // console.log(gridNum);
-
-  for (let z = 0; z < 50; z++) {
-    let row = grid[z];
-    for (var i = 0; i < 50 - 2; i++) {
-      var check = +row[i + 2].innerText - +row[i + 1].innerText !== +row[i].innerText;
-      // console.log(check);
-    }
-    const arr = [];
-    grid.push(arr);
-    if (check) {
-      // const element = document.createElement('div');
-      // document.getAttribute;
-      // arr.push(element);
-      // container.appendChild(element);
-      // element.innerText = 0;
-      // +grid[0][0].innerText = 0
-    }
-  }
-
-  // const booleanArr = [true, true];
-
-  // for (let i = 0; i < 50 - 2; i++) {
-  //   var row = gridNum[y];
-  //   const check = row[i + 2] - row[i + 1] === row[i];
-  //   booleanArr.push(check);
-  //   if (booleanArr[0] && booleanArr[1] && booleanArr[2] && booleanArr[3] && booleanArr[4]) {
-  //     row[0] = 0;
-  //     row[1] = 0;
-  //     row[2] = 0;
-  //     row[3] = 0;
-  //     row[4] = 0;
-  //   }
-  // }
-  // console.log(row);
-
-  // // console.log(booleanArr);
-  // let z = 0;
-  // for (let z = 0; z < 50; z++) {
-  //   let row = gridNum[z];
-  //   let i = 0;
-  //   while (i < 50 - 2) {
-  //     const check = row[i + 2] - row[i + 1] === row[i];
-  //     console.log(check);
-  //     // if(check) {
-
-  //     // }
-  //     i++;
-  //   }
-  // }
-
-  // const check = () => {
-  //   booleanArr = [true, true];
-  //   const row = gridNum[0];
-  //   for (let i = 0; i < 50 - 2; i++) {
-  //     const boolean = row[i] + row[i + 1] === row[i + 2];
-  //     const boolean = row[i + 2] - row[i + 1] === row[i];
-  //     if (boolean) {
-  //       row[0].style.backgroundColor = 'blue';
-  //     }
-  //     booleanArr.push(boolean);
-  //   }
-  //   console.log(booleanArr);
-  // };
-  // checkFibonacciNumbers();
   click();
 });
-
-// grid[i][x].style.backgroundColor = 'blue';
-// grid[x][i].style.backgroundColor = 'blue';
-// grid[x][x].style.backgroundColor = 'blue';
-// grid[i][y].style.backgroundColor = 'blue';
-// grid[y][i].style.backgroundColor = 'blue';
-// grid[y][y].style.backgroundColor = 'blue';
-// grid[i][i].style.backgroundColor = 'blue';
-
-// grid[i].style.backgroundColor = 'blue';
-// grid[x].style.backgroundColor = 'blue';
-// grid[y].style.backgroundColor = 'blue';
